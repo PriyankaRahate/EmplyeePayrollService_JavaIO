@@ -2,6 +2,8 @@ package empPayrollTest;
 
 import static org.junit.Assert.assertTrue;
 
+import static org.junit.Assert.assertTrue;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,7 +22,6 @@ public class NIOFileAPITest {
 
 	@Test
 
-	
 	public void givenPathWhenCheckedThenConfirm() throws IOException {
 		
 		Path homePath = Paths.get(HOME);
@@ -33,10 +34,11 @@ public class NIOFileAPITest {
 			FileUtils.deleteFiles(playPath.toFile());
 		assertTrue(Files.notExists(playPath));
 
+	
 		Files.createDirectory(playPath);
 		assertTrue(Files.exists(playPath));
 
-		
+	
 		IntStream.range(1, 10).forEach(cntr -> {
 			Path tempFile = Paths.get(playPath + "/temp" + cntr);
 			assertTrue(Files.notExists(tempFile));

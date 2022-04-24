@@ -14,6 +14,7 @@ public class EmployeePayrollService {
 	
 	public List<EmployeePayrollData> employeePayrollList;
 
+	
 	public EmployeePayrollService() {
 	}
 
@@ -59,6 +60,11 @@ public class EmployeePayrollService {
 			System.out.println("Writing Employee Payroll Data to Console\n" + employeePayrollList);
 		else if (ioService.equals(IOService.FILE_IO))
 			new EmployeePayrollFileIOService().writeData(employeePayrollList);
+	}
+
+	
+	public void printData(IOService ioService) {
+		new EmployeePayrollFileIOService().printData();
 	}
 
 	

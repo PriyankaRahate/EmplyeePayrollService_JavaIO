@@ -15,7 +15,6 @@ public class EmployeePayrollFileIOService {
 	public void writeData(List<EmployeePayrollData> employeePayrollList) {
 		StringBuffer empBuffer = new StringBuffer();
 
-		
 		employeePayrollList.forEach(employee -> {
 			String employeeDataString = employee.toString().concat("\n");
 			empBuffer.append(employeeDataString);
@@ -24,6 +23,14 @@ public class EmployeePayrollFileIOService {
 		
 		try {
 			Files.write(Paths.get(PAYROLL_FILE_NAME), empBuffer.toString().getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void printData() {
+		try {
+			Files.lines(new File(PAYROLL_FILE_NAME).toPath()).forEach(System.out::println);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
