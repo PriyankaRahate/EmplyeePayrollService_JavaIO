@@ -2,8 +2,6 @@ package empPayrollTest;
 
 import static org.junit.Assert.assertTrue;
 
-import static org.junit.Assert.assertTrue;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,6 +10,7 @@ import java.util.stream.IntStream;
 import org.junit.Test;
 
 import employeeServiceDay27.FileUtils;
+import employeeServiceDay27.Java8WatchService;
 
 
 public class NIOFileAPITest {
@@ -22,23 +21,25 @@ public class NIOFileAPITest {
 
 	@Test
 
+	
 	public void givenPathWhenCheckedThenConfirm() throws IOException {
-		
+		/**
+		 * check file exists or not
+		 */
 		Path homePath = Paths.get(HOME);
 		assertTrue(Files.exists(homePath));
 		System.out.println(homePath);
 
-		
 		Path playPath = Paths.get(HOME + "/" + PLAY_WITH_NIO);
 		if (Files.exists(playPath))
 			FileUtils.deleteFiles(playPath.toFile());
 		assertTrue(Files.notExists(playPath));
 
-	
+		
 		Files.createDirectory(playPath);
 		assertTrue(Files.exists(playPath));
 
-	
+		
 		IntStream.range(1, 10).forEach(cntr -> {
 			Path tempFile = Paths.get(playPath + "/temp" + cntr);
 			assertTrue(Files.notExists(tempFile));
@@ -57,5 +58,12 @@ public class NIOFileAPITest {
 		System.out.println("Files.newDirectory with temp");
 		Files.newDirectoryStream(playPath, path -> path.toFile().isFile() && path.toString().contains("temp"))
 				.forEach(System.out::println);
+	}
+
+	
+	public void givenADirectoryWhenWatchedListsAllTheActivities() throws IOException {
+		Path dir = Paths.get(HOME + "/" + PLAY_WITH_NIO);
+		Files.list(dir).filter(Files::isRegularFile).forEach(System.out::println);
+		new Java8WatchService(dir).processEvents();
 	}
 }

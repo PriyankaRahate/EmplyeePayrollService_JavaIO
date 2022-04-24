@@ -1,50 +1,85 @@
 package employeeServiceDay27;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class EmployeePayrollFileIOService {
 
-	
-	public static String PAYROLL_FILE_NAME = "src/payroll-file.txt";
+	public enum IOService {
+		CONSOLE_IO, FILE_IO, DB_IO, REST_IO
+	}
 
 	
-	public void writeData(List<EmployeePayrollData> employeePayrollList) {
-		StringBuffer empBuffer = new StringBuffer();
+	public List<EmployeePayrollData> employeePayrollList;
 
-		employeePayrollList.forEach(employee -> {
-			String employeeDataString = employee.toString().concat("\n");
-			empBuffer.append(employeeDataString);
-		});
+	
+	public EmployeePayrollFileIOService() {
+	}
+
+	
+	public EmployeePayrollFileIOService(List<EmployeePayrollData> employeePayrollList) {
+		this.employeePayrollList = employeePayrollList;
+	}
+
+	
+	public static void main(String[] args) {
 
 		
-		try {
-			Files.write(Paths.get(PAYROLL_FILE_NAME), empBuffer.toString().getBytes());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		List<EmployeePayrollData> employeePayrollList = new ArrayList<EmployeePayrollData>();
+
+		
+		EmployeePayrollFileIOService employeePayrollService = new EmployeePayrollFileIOService(employeePayrollList);
+
+		Scanner consoleInputReader = new Scanner(System.in);
+
+		
+		employeePayrollService.readEmployeeData(consoleInputReader);
+
+		employeePayrollService.writeEmployeeData(IOService.CONSOLE_IO);
+	}
+
+	
+	private void writeEmployeeData(IOService consoleIo) {
+		
+	}
+
+
+	public void readEmployeeData(Scanner consoleInputReader) {
+		System.out.println("Enter employee ID : ");
+		int id = Integer.parseInt(consoleInputReader.nextLine());
+		System.out.println("Enter employee name : ");
+		String name = consoleInputReader.nextLine();
+		System.out.println("Enter employee salary : ");
+		double salary = Double.parseDouble(consoleInputReader.nextLine());
+
+		
+		employeePayrollList.add(new EmployeePayrollData(id, name, salary));
+	}
+
+	
+	public void writeEmployeeData(List<EmployeePayrollData> employeePayrollList2) {
+		if (employeePayrollList2.equals(IOService.CONSOLE_IO))
+			System.out.println("Writing Employee Payroll Data to Console\n" + employeePayrollList);
+		else if (employeePayrollList2.equals(IOService.FILE_IO))
+			new EmployeePayrollFileIOService().writeEmployeeData(employeePayrollList);
 	}
 
 	
 	public void printData() {
-		try {
-			Files.lines(new File(PAYROLL_FILE_NAME).toPath()).forEach(System.out::println);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		new EmployeePayrollFileIOService().printData();
 	}
 
 	
 	public long countEntries() {
-		long entries = 0;
-		try {
-			entries = Files.lines(new File(PAYROLL_FILE_NAME).toPath()).count();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return entries;
+		Object ioService = null;
+		if (ioService.equals(IOService.FILE_IO))
+			return new EmployeePayrollFileIOService().countEntries();
+		return 0;
+	}
+
+
+	public void readData(List<EmployeePayrollData> employeePayrollList2) {
+	
 	}
 }

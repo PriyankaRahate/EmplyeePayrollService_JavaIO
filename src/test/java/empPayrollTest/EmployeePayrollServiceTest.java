@@ -1,5 +1,6 @@
 package empPayrollTest;
 
+
 import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
@@ -26,10 +27,10 @@ public class EmployeePayrollServiceTest {
 		
 		employeePayrollService.writeEmployeeData(IOService.FILE_IO);
 
-		
 		long entries = employeePayrollService.countEntries(IOService.FILE_IO);
 		employeePayrollService.printData(IOService.FILE_IO);
 		assertEquals(3, entries);
 	}
 }
+
 
