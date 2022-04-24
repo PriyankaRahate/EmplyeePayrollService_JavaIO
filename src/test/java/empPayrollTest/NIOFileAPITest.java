@@ -27,12 +27,12 @@ public class NIOFileAPITest {
 		assertTrue(Files.exists(homePath));
 		System.out.println(homePath);
 
+		
 		Path playPath = Paths.get(HOME + "/" + PLAY_WITH_NIO);
 		if (Files.exists(playPath))
 			FileUtils.deleteFiles(playPath.toFile());
 		assertTrue(Files.notExists(playPath));
 
-		
 		Files.createDirectory(playPath);
 		assertTrue(Files.exists(playPath));
 
@@ -47,6 +47,7 @@ public class NIOFileAPITest {
 			assertTrue(Files.exists(tempFile));
 		});
 
+		
 		System.out.println("Files.list");
 		Files.list(playPath).filter(Files::isRegularFile).forEach(System.out::println);
 		System.out.println("Files.newDirectory");
