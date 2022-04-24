@@ -2,7 +2,6 @@ package employeeServiceDay27;
 
 public class EmployeePayrollData {
 
-	
 	public int id;
 	public String name;
 	public double salary;
