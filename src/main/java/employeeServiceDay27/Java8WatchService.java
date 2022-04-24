@@ -9,14 +9,12 @@ import java.util.Map;
 
 public class Java8WatchService {
 
-	
 	private static final Kind<?> ENTRY_DELETE = null;
 	private static final Kind<?> ENTRY_MODIFY = null;
 	private static final Kind<?> ENTRY_CREATE = null;
 	private final WatchService watcher;
 	private final Map<WatchKey, Path> dirWatchers;
 
-	
 	public Java8WatchService(Path dir) throws IOException {
 		this.watcher = FileSystems.getDefault().newWatchService();
 		this.dirWatchers = new HashMap<WatchKey, Path>();

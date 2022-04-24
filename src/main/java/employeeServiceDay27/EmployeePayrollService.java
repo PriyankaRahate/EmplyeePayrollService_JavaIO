@@ -23,7 +23,6 @@ public class EmployeePayrollService {
 		this.employeePayrollList = employeePayrollList;
 	}
 
-	
 	public static void main(String[] args) {
 
 		
@@ -32,9 +31,9 @@ public class EmployeePayrollService {
 		
 		EmployeePayrollService employeePayrollService = new EmployeePayrollService(employeePayrollList);
 
+		
 		Scanner consoleInputReader = new Scanner(System.in);
 
-		
 		employeePayrollService.readEmployeeData(consoleInputReader);
 
 		
